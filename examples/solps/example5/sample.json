@@ -1,0 +1,33 @@
+{
+"scan": {
+    "ne_sep": {
+        "type": "range",
+        "ymin": 2.0,
+        "ymax": 5.0
+        },
+    "te_sep": {
+        "type": "range",
+        "ymin": 0.075,
+        "ymax": 0.15
+        },
+    "ti_sep": {
+        "type": "range",
+        "ymin": 0.075,
+        "ymax": 0.15
+        }
+    },
+
+"const": {
+    "shot": 0
+},
+
+"model": {
+},
+
+"io": {
+    "index"       : ["solps_init" , "TIME_ID"   ],
+    "ne_sep"      : ["solps_init" , "INSTATE_NE_SEP_0" ],
+    "te_sep"      : ["solps_init" , "INSTATE_TE_SEP_0" ],
+    "ti_sep"      : ["solps_init" , "INSTATE_TI_SEP_0" ]
+    }
+}

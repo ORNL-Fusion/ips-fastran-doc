@@ -1,0 +1,20 @@
+{
+    "shot": "solps_init:SHOT",
+    "time": "solps_init:TIME_ID",
+    "output" : [
+        ["solps__solps_init",   "instate", "instate", "work"],
+        ["solps__solps_init",   "b2fstati", "b2fstati", "work"],
+        ["solps__solps_init",   "b2fgmtry", "b2fgmtry", "work"],
+        ["solps__solps_solver", "b2fstate", "b2fstate", "trace"],
+        ["solps__solps_solver", "b2ftrace", "b2ftrace", "trace"],
+        ["solps__solps_solver", "b2time.nc", "b2time.nc", "trace"],
+        ["solps__solps_solver", "b2tallies.nc", "b2tallies.nc", "trace"],
+        ["solps__solps_solver", "b2wdat.tar", "b2wdat.tar", "trace"],
+        ["solps__solps_solver", "fort.44", "fort.44", "trace"],
+        ["solps__solps_solver", "balance.nc", "balance.nc", "trace"],
+        ["solps__solps_constraint_separatrix",   "instate", "instate_", "work"]
+    ],
+    "input" : [
+        "solps_iter.config", "submitjob"
+    ]
+}

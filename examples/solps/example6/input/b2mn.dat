@@ -1,0 +1,173 @@
+*label          (lblmn: character*60)
+  'template, 5.2 switches'
+*b2cmpa  basic parameters
+*b2cmpb  boundary conditions
+*b2cmpt  transport coefficients
+*cflim    cflme    cflmi     cflmv     cflal     cflab  ... (not used)
+ ' -1'    0.15     0.5       0.5       0.5       0.5      0.     0.    0.
+*endphy
+#        
+#       e-heat    ion-heat  ion-mom thermo-elec  friction
+# Zero turns off the limiter, but might be safer to set alpha to a large value
+#
+#
+# BASIC RUN PARAMETERS
+#
+'balance_netcdf'                   '1'
+'b2wdat_iout'                      '1' 
+'b2news_no_solve'                  '0'
+'b2mndr_ntim'                      '100'         # nsteps, if 0 then only write state file
+'b2mndr_dtim'                      '1.0e-5'      # dt (sec)
+'b2mndr_stim'                      '0.0'         # Initial time, if < 0 append tracing files
+'b2mndt_rxf'                       '0.5'         # Main under-relaxation parameter
+'b2mndt_nstg0'                     '1'           # nsteps (compute linearized rate coeffs)
+'b2mndt_nstg1'                     '1'           # nsteps (compute linearized source)
+'b2mndt_nstg2'                     '1'           # nsteps (compute inner iteration)
+'b2mndr_cpu'                       '72000.0'     # cpu limit (seconds), 0.0 means no limit
+'b2mndr_savecpu'                   '7200.0'      # cpu time interval for save files plasmastate.XXXX
+'b2stbc_feedback'                  '0'           # 1 = enable feedback BCs (default 0)
+'b2mndr_rescale_neutrals'          '1.0e-10'     # Multiplier to neutral density on first timestep FLUID_SWITCH=1.0
+'b2mndr_rescale_neutrals_sources'  '1.0e-10'     # Multiplier to neutral sources FLUID_SWITCH=1.0
+'b2mndr_density_rescale'           '1.0e-0'      # Multiplier to all densities on the first timestep
+'b2mwti_jxi'                       '38'          # Index of inner midplane
+'b2mwti_jxa'                       '55'          # Index of outer midplane
+'b2npmo_ion_vlct_restrict'         '2'           # if not zero v||i to 3x cs, if 2 also restrict vExB to 2x cs (default 0)
+'#b2mndr_use_9pt_stencil'          '1'           # FLUID_SWITCH=1
+#
+# BASIC NUMERICS PARAMETERS
+#
+'b2mndr_na_min'       '1.0e6'        # Minimum density in each cell for all species
+'b2mndr_na_new'       '1.0e14'       # Initial density in each cell for new species
+'#b2npco_rxg'          '0.1'         # Special under-relaxation factors (continuity eq, def 1.0)
+'#b2npht_rxg'          '0.1'         # Smaller values imply stronger damping (energy eq, def 1.0)
+'#b2npmo_rxg'          '0.1'         # (momentum, def 1e6)  This one treated differently?
+'#b2nph9_rxg'          '0.1'         # (9pt energy)
+'#b2npc9_rxg'          '0.1'         # (9pt continuity)
+'b2news_guard_flows'  '2'            # Guard flow handling (recommended 2)
+'b2mndt_style'        '1'            # If 0 call b2news (5.0/5.1), if 1 call b2news_ (5.2). Default 1
+'b2ux5p_style'        '2'            # 5pt stencil solver. Only use 2.
+'b2ux7p_style'        '2'            # 7pt stencil solver. Only use 2.
+'b2ux9p_style'        '2'            # 9pt stencil solver. Only use 2.
+'b2stbc_sna0ep'       '1.0e-18'      # Small source introduced in all cells (default 1.e-36) JDL
+'b2news_poteq'        '1'            # Potential eq solve. 0 not solved, 2 phi = 3.1*Te/qe (1 default)
+'b2tfhe_no_current'   '0'            # If 1 all currents set to zero. Must be 1 if b2news_poteq ne 1
+'b2news_potit'        '500'          # Max iterations on the potential eq (default 50)
+'b2news_potitmin'     '0'            # Min number of iterations (default 0)
+'b2news_potok'        '1.e-2'        # Target residual on potential eq (default 1.e-2)
+'b2news_area_fix'     '3'            # Anything other than 3 is wrong (default 3)
+'b2tfnb_xfrhie'       '1.0'          # Multiplier to upwind correction (default 1.0)
+'b2nxfx_style'        '1'            # Related to form of e-atom thermal force (recommend = default = 1)
+'b2nxdv_style'        '1'            # Recommend 1 (related to friction force in guard cells)
+'b2npht_style'        '1'            # Recommend 1 (Use SPB form of b2sihs_)
+'b2nph9_style'        '1'            # Recommend 1 (Use SPB form of b2sihs_)
+'b2nxfc_style'        '1'            # Recommend 1 (interpolation of flcb and cvcb)
+'b2tfnb_drift_style'             '1' # Recommend 1 (drift velocities at cell faces)
+'b2trcl_conductive_limit'        '1' # Recommend 1 (apply flux limit to parallel ion and electron heat fluxes through transport coefficients)
+'b2tfhe_lim_flux'                '0' # Recommend 0 (Goes with b2trcl_conductive_limit 1)
+'b2tfhi_lim_flux'                '0' # Recommend 0 (Goes with b2trcl_conductive_limit 1)
+'b2tfnb_mdf'                     '1' # Recommend 1 with drifts. New SPB form of particle flux. (default 0)
+'b2tfhe_mdf'                     '1' # Recommend 1 with drifts. New SPB form of e heat flux. (default 0)
+'b2tfhi_mdf'                     '1' # Recommend 1 with drifts. New SPB form of i heat flux. (default 0)
+'b2news_no_b2sral_call'          '1' # Recommend 1. 0 reproduces SOLPS4 with extra call to compute sources in b2news_.
+'b2news_re_eval_prtls_fluxes'    '0' # If 1 recompute particle fluxes at end of b2news_. Default 0. Superceded by use_eirene.
+#
+# COUPLING TO EIRENE
+#
+'b2mndr_eirene'                '1'   # Activate coupling with EIRENE -- FLUID_SWITCH=0
+'eirene_repeat_first_call'     '1'   # Number of repeats on first call to eirene where flux is ignored (can be used in puff cases)
+'eirene_ionizing_core'         '1'   # Add Eirene flux through core as fully stripped ions (No longer compatible with BCCON 1)
+'eirene_ank_mods'              '0'   # (default 0) Other values activate addl scheme for particle balance
+'eirene_savef30'               '0'   # Save plasma geometry for EIRENE 
+'eirene_savef31'               '0'   # Save plasma state file for EIRENE
+'eirene_dpc_fix'               '1'   # Anything other than 1 is wrong
+'eirene_te_min'                '0.1' # min value for writing data for EIRENE (eV, default = 0.0)
+'eirene_ti_min'                '0.1' # min value for writing data for EIRENE (eV, default = 0.0)
+'eirene_stab_corr'             '0'   # Correction to convert Eirene energy term to internal energy. Can cause issues at large dt
+#
+# OUTPUT
+#
+'tallies_netcdf'               '1' # Create b2tallies.nc
+'b2mndt_ntim_step_out'         '1' # Write resduals at each Kth step in b2fstrace. 
+'b2mndt_moqtlv'                '3' # Controls quick trace output. -1 no out, 0 once per nt, 1 once per nstg0, 2 once per nstg1 ... 
+'b2mndr_b2time'                '1' # Number of timesteps between writes to b2time.nc
+'b2mndr_tally'                 '1' # Number of timesteps between writes to tallies file
+'b2mndr_mvnum'                 '0' # Number of instances of movie data
+'b2mndr_mvinc'                 '1' # Number of timesteps bwteen movie data
+'b2stbc_diagno'                '0' # level of output in b2stbc. (0-3, default 0)
+'b2ux5p_nltrsol'               '2' # Output level for matrix solver (default 2)  JDL - may not be safe to turn off
+'b2ux7p_nltrsol'               '0' # Output level for matrix solver (default 2)
+'b2ux9p_nltrsol'               '0' # Output level for matrix solver (default 2)
+
+#
+# NAMELIST AND INPUTFILE COUPLING
+#
+'b2stbc_boundary_namelist'  '1'  # Look for corresponding namelists
+'b2stbr_neutrals_namelist'  '1'
+'b2srdt_numerics_namelist'  '1'
+'b2tqna_transport_namelist' '1'
+'b2tqna_inputfile'          '0'  # Look for b2.transport.inputfile
+
+#
+# PHYSICS PARAMETERS
+#
+'b2trcl_lluciani'              '3'   # 3 is SPB new form (recommended = default = 3)
+'b2trcl_lvis21'                '0'   # 21 moment method for viscosities (now obsolete, default 0) 
+'b2trcl_lthf21'                '0'   # 0 is Use 21 moment for heat xfer (default 0)
+'b2sigp_style'                 '2'   # Must set to 1 if no potential eq
+'b2sihs_istyle_Joule_heating'  '1'   # If b2sigp_style eq 2 then this has no effect, else neglect radial joule heating (default 1)
+'b2tfhe_neutral'               '0.0' # Multiplier for ion-neutral current (default 0, if 1 requires a drift be active!)
+'b2tfhe_vis_par'               '1.0' # Multiplier for current driven by parallel viscosity (default 1.0) JDL CHECK
+'b2tfhe_vis_per'               '0.0' # Multiplier for current driven by perpendicular viscosity (default 1.0) JDL CHECK
+'b2tfhe_vis_q'                 '1.0' # Multiplier for current driven by heat viscosity (default 1.)
+'b2news_facdrift_target'       '0.0' # Diamagnetic drift factor goal
+'b2news_facdrift_start'        '0.0' # Initial value for diamagnetic drift factor
+'b2news_facdrift_inc'          '1.0' # On each timestep facdrift is multiplied by facdrift_inc
+'b2news_facdrift_dec'          '0.0' # If does not converge, multiply by facdrift_dec
+'b2news_facExB_target'         '0.0' # ExB drift factor goal
+'b2news_facExB_start'          '0.0' # Initial value for ExB drift factor
+'b2news_facExB_inc'            '1.0' # On each timestep ExB is multiplied by facExB_inc
+'b2news_facExB_dec'            '0.0' # If does not converge, multiply by facExB_dec
+'b2news_facvis_target'         '0.0' # Same factors for viscosity
+'b2news_facvis_start'          '0.0' #
+'b2news_facvis_inc'            '1.0' #
+'b2news_facvis_dec'            '0.0' #
+'b2sqel_artificial_radiation'  '0.0' # Fraction of artificial impurities
+'b2tqca_model'                 '1'   # 1 use Belescu form for chii_par, 2 is Braginskii (default 1)
+'b2tqce_model'                 '1'   # 1 use Belescu form for chie_par, 2 is Braginskii (default 1)
+'b2tqce_fke_Zhdanov'           '1'   # 1 use Zhdanov form for electron thermal cond (recommended = default = 1)
+'b2tfhe_alfTeEh'               '0.0' # 0 means old form is used (recommended 0.0)
+'b2tfhe_fch_pTe'               '1.0' # 1 means use new form of electron heat flux (recommend 1.0)
+'b2mndr_hz'                    '1.0' # 0 is old form of mom eq, 1 is new form (default 1)
+'b2npmo_b2sifr_'               '1'   # 1 is correct form of friction force (default 1)
+'b2sicf_phm0'                  '1.0' # Multiplier to centrifugal force term (recommend=default=1.0)
+'b2sicf_phm1'                  '1.0' # Multiplier to centrifugal force correction term (recommend=default=1.0)
+'b2sian_phm0'                  '1.0' # Multiplier to par momentum source from anom current with drifts (recommend=default=1)
+'b2siav_addvis'                '1.0' # Multiplier to heat flux contrib to div(pi) in momentum eq (default 1) JDL
+'b2siav_addvis1'               '1.0' # If 1 add div(pi) from x-variations in B (default 1)
+'b2sral_style'                 '2'   # Related to particle flux with drifts (default = recommend = 2)
+'b2trno_csig_an_style'         '1'   # If 1 zero anom contribs to parallel current terms (default 1)
+'b2tlmv_style'                 '1'   # Related to viscous flux limits (default 1)
+#
+# FLUID NEUTRAL SETTINGS
+#
+'b2tlh0_flux_limit_style'   '2'   # If 2 use SPB treatment for flux limits (default = recommend = 2)
+'b2trno_flux_limit_to_dpa'  '1'   # Flux limit to neutral contribution to dpa0 (recommend = default = 1)
+'b2tfnb_alpha'              '0.0' # Flux limit factor for convective neutral flow (default 0.0, 0 is off) 
+'b2tfnb_gamma'              '2.0' # Flux limit exponent for convective neutral flow (default 2.0)   
+'b2tlc0_alpha'              '1.0' # Flux limit factor for pressure driven neutral diffusion (default 1.0, 0 is off) 
+'b2tlc0_gamma'              '1.0' # Flux limit exponent for pressure driven neutral diffusion (default 1.0)   
+'b2tlh0_alpha'              '1.0' # Flux limit factor for neutral heat conductivity (default 1.0, 0 is off)  
+'b2tlh0_gamma'              '1.0' # Flux limit exponent for neutral heat conductivity (default 1.0)   
+#
+# EXTRA
+# 
+'b2tlnl_ii'           '0'           # Positive means value for Coul Log, negative means abs() is lower bound (default 0)
+'b2tlnl_ee'           '0'           # Positive means value for Coul Log, negative means abs() is lower bound (default 0)
+'b2tlnl_ei'           '0'           # Positive means value for Coul Log, negative means abs() is lower bound (default 0)
+'b2tfnb_PSch'         '1.0'         # Multiplier to P-S flows (default 1)
+'b2stbc_cbc'          '1.0'         # Multiplier to ExB velocity for sheath bcs. (Default 1.0)
+'b2tfnb_ycur'         '1.0'         # Multiplier to viscosities radial (default = 1.0) (default: radial current is carried by ions)
+'b2tfnb_xcur'         '0.0'         # Multiplier to viscosities poloidal (default = 0.0) (default: poloidal current is carried by electrons)
+
+
+

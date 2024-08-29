@@ -1,0 +1,26 @@
+ &numerics
+ dtco(0,1)= 9*40.0, dtco(0,2) = 9*10.0, dtco(0,3) = 9*1.0, dtco(0,4) = 9*1.0,
+ dtmo(0,1)= 9*40.0, dtmo(0,2) = 9*10.0, dtmo(0,3) = 9*1.0, dtmo(0,4) = 9*1.0,
+ dtee(1)=      40.0, dtee(2)   =    10.0, dtee(3)   =    1.0, dtee(4)   =    1.0,
+ dtei(1)=      40.0, dtei(2)   =    10.0, dtei(3)   =    1.0, dtei(4)   =    1.0,
+
+ solveco(0,0)=F,F,F,6*T,
+ solveco(0,1)=F,F,F,6*T,
+ solveco(0,2)=F,T,F,6*T,
+ solveco(0,3)=F,T,F,6*T,
+ solveco(0,4)=F,T,F,6*T,
+
+ solvemo(0,0)=F,F,F,6*T,
+ solvemo(0,1)=F,F,F,6*T,
+ solvemo(0,2)=F,T,F,6*T,
+ solvemo(0,3)=F,T,F,6*T,
+ solvemo(0,4)=F,T,F,6*T,
+
+ solveee = F, F, T, T, T
+ solveei = F, F, T, T, T
+
+/
+
+
+
+

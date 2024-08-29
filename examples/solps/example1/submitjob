@@ -1,0 +1,13 @@
+#!/bin/bash -l
+#SBATCH -q debug
+#SBATCH -N 1
+#SBATCH -t 00:30:00
+#SBATCH -J ips_solps
+#SBATCH -e ips.err
+#SBATCH -o ips.out
+#SBATCH -C cpu
+
+module load python
+source activate /global/common/software/atom/perlmutter/cesol/conda/latest
+
+ips.py --simulation=solps_iter.config --platform=$MACHINE_CONFIG_SERIAL --log=ips.log 1> ips.out 2> ips.err & 

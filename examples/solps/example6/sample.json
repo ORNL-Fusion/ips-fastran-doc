@@ -1,0 +1,41 @@
+{
+"scan": {
+    "ne_sep": {
+        "type": "range",
+        "ymin": 2.0,
+        "ymax": 5.0
+        },
+    "te_sep": {
+        "type": "range",
+        "ymin": 0.075,
+        "ymax": 0.15
+        },
+    "ti_sep": {
+        "type": "range",
+        "ymin": 0.075,
+        "ymax": 0.15
+        }
+    },
+
+"const": {
+    "shot": 0,
+    "ne_ped": 8.0,
+    "betan": 2.1
+},
+
+"model": {
+    "pped"   : ["file", "fit_eped.json"       ],
+    "te_ped" : ["base", {"dependency":"pped"} ],
+    "ti_ped" : ["expr", "te_ped"              ]
+},
+
+"io": {
+    "index"  : ["solps_init" , "TIME_ID"   ],
+    "ne_sep" : ["solps_init" , "INSTATE_NE_SEP_0" ],
+    "te_sep" : ["solps_init" , "INSTATE_TE_SEP_0" ],
+    "ti_sep" : ["solps_init" , "INSTATE_TI_SEP_0" ],
+    "te_ped" : ["solps_init" , "INSTATE_TE_PED_0" ],
+    "ti_ped" : ["solps_init" , "INSTATE_TI_PED_0" ]
+}
+
+}
