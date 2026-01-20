@@ -1,0 +1,12 @@
+  {
+     "output" : [
+         ["fastran_tr_fastran", "fastran.nc"   , "f", "result" ],
+         ["fastran_tr_fastran", "i??????.?????", "i", "result" ],
+         ["fastran_eq_efit",    "g??????.?????", "g", "result" ],
+         ["fastran_eq_efit",    "a??????.?????", "a", "result" ],
+         ["fastran_eq_efit",    "s??????.?????", "s", "result" ]
+     ],
+     "input" : [
+         "fastran_scenario.config"
+     ]
+  }
