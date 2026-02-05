@@ -1,0 +1,32 @@
+&eped_input
+
+  num_scan = 1 
+
+  shot    = 131999
+  timeid  = 3000
+  runid   = 1
+
+  ip      = 1.4870
+  bt      = 2.0988
+  r       = 1.6954
+  a       = 0.5788
+  kappa   = 1.807
+  delta   = 0.198
+  zeta    = 0.00 
+  neped   = 5.8760
+  betan   = 1.851
+  zeffped = 1.603
+  m       = 2 
+  z       = 1 
+  mi      = 12 
+  zi      = 6 
+
+  teped   = 592.04
+  tewid   = 0.0317
+  ptotped = 10.7064
+  ptotwid = 0.0335
+
+  ne0 = -1.0
+  nesep = -1.0
+
+/
