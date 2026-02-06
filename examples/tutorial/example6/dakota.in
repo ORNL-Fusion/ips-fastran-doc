@@ -1,0 +1,38 @@
+
+strategy
+  single_method
+  tabular_graphics_data
+
+model
+  single
+
+interface
+  fork asynchronous evaluation_concurrency = 1 file_tag, file_save
+  analysis_driver = 'ips_dakota_client.py'
+  parameters_file = 'params.in'
+  results_file    = 'results.out'
+  failure_capture = recover -1.0 -1.0
+
+responses
+  num_objective_functions = 2
+  no_gradients
+  no_hessians
+
+variables
+  continuous_design = 3
+  descriptors
+ 'eped_driver__TIMEID'
+ 'eped_driver__IP'
+ 'eped_driver__NEPED'
+
+method
+  list_parameter_study
+  list_of_points =
+     0 1.200000e+00 5.700912e+00 
+     1 1.200000e+00 8.551368e+00 
+     2 1.300000e+00 6.175988e+00 
+     3 1.300000e+00 9.263982e+00 
+     4 1.400000e+00 6.651064e+00 
+     5 1.400000e+00 9.976596e+00 
+     6 1.500000e+00 7.126140e+00 
+     7 1.500000e+00 1.068921e+01 
