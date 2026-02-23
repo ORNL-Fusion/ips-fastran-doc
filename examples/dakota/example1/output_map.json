@@ -1,0 +1,20 @@
+{
+  "variable": {
+      "pfuse" : ["fastran" , "pfuse"     , "output"],
+      "pfusi" : ["fastran" , "pfusi"     , "output"],
+      "prfe"  : ["fastran" , "prfe"      , "output"],
+      "prfi"  : ["fastran" , "prfi"      , "output"]
+  },
+  "const": {
+      "eta_cd" : 0.25,
+      "eta_th" : 0.33
+  },
+  "model": {
+      "pfus" : ["expr", "5.0 * ( pfuse + pfusi )"],
+      "pinj" : ["expr", "prfe + prfi"],
+      "pnet" : ["base", {}]
+  },
+  "io": [
+      "pfus", "pnet"
+  ]
+}

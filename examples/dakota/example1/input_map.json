@@ -1,0 +1,18 @@
+{
+  "scan": [
+    "r",
+    "aratio"
+  ],
+
+  "const": {
+  },
+
+  "model": {
+    "a" : ["expr", "r / aratio" ]
+  },
+
+ "io": {
+    "r"  : ["fastran_init", "R0" ],
+    "a"  : ["fastran_init", "A0" ]
+  }
+}

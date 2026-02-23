@@ -1,0 +1,15 @@
+#!/bin/bash -l
+#SBATCH -q debug
+#SBATCH -N 1
+#SBATCH -t 00:30:00
+#SBATCH -J ips_nfreya
+#SBATCH -e ips.err
+#SBATCH -o ips.out
+#SBATCH -C cpu
+
+module load python
+source activate /global/common/software/atom/perlmutter/cesol/conda/dev
+
+dakota -i dakota_ips.in -o dakota_ips.out >& dakota_ips.out &
+
+conda deactivate
