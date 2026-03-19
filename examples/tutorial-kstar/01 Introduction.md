@@ -6,7 +6,7 @@
 - Extended 1.5D integrated modeling - backbone integrated modeling for Whole Facility Modeling
   - Steady-state and time-dependent modeling
   - From core to wall
-	- Coupling to engineering modeling
+  - Coupling to engineering modeling
 - Being actively developed under DOE projects
 	- C2W, FREDA SciDAC, Pulse Simulator, Base theory
 
