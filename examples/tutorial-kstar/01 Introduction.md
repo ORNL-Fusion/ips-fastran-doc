@@ -155,6 +155,68 @@ plot_fastran.py -n SUMMARY/f000001.00001 --show
   -s, --show: show at screen
 ```
 
+### Collect output files
+
+```bash
+collect.py --single --input=post/collect.json --rdir=RUN --sdir=00000 
+```
+
+- collect.sjon
+
+```json
+    {
+     "output" : [
+         ["fastran_tr_fastran", "fastran.nc", "f", "result" ],
+         ["fastran_tr_fastran", "i??????.?????", "i", "result" ],
+         ["fastran_eq_efit", "g??????.?????", "g", "result" ],
+         ["fastran_eq_efit", "a??????.?????", "a", "result" ]
+     ],
+     "input" : [
+         "fastran_scenario.config"
+     ],
+     "input_dir": [
+	 "input"
+     ]
+  }
+```
+
+### Summary global varibales
+
+```bash
+ makedb.py --input=post/makedb.json --rdir=SUMMARY
+```
+
+- makedb.json
+
+```json
+ {
+    "variable": {
+        "ip"         : ["fastran" , "ip"       , "output"],
+        "we"         : ["fastran" , "we"       , "output"],
+        "wi"         : ["fastran" , "wi"       , "output"],
+        "wb"         : ["fastran" , "wb"       , "output"],
+        "tau89"      : ["fastran" , "tau89"    , "output"],
+        "tau98"      : ["fastran" , "tau98"    , "output"],
+        "tauth"      : ["fastran" , "tauth"    , "output"],
+        "betan"      : ["fastran" , "betan"    , "output"],
+        "ibs"        : ["fastran" , "ibs"      , "output"],
+        "inb"        : ["fastran" , "inb"      , "output"],
+        "irf"        : ["fastran" , "irf"      , "output"]
+    },
+    "model": {
+        "fbs"        : ["expr", "ibs / ip"],
+        "fnb"        : ["expr", "inb / ip"],
+        "frf"        : ["expr", "irf / ip"],
+        "fni"        : ["expr", "fbs + fnb + frf"],
+	    "wmhd"       : ["expr", "we + wi + wb"],
+	    "h98"        : ["expr", "tauth / tau98"]
+    }
+  }
+```
+
+
+
+
 # Example 2: Generate input files from KSTAR experiment
 
 ```
