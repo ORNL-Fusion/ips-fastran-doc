@@ -1,0 +1,62 @@
+&innfreya
+
+  bptor = 23.75e6     ! injection power (W)
+  ebkev = 750.0       ! Maximum particle energy in source (keV)
+  fbcur = 1.0 0.0 0.0 ! Fraction of current at energy
+
+  nbeams = 1          ! Number of beamlines
+  nsourc = 1          ! Number of sources per beamline
+  anglev  = 0.0       ! Vertical angle (degrees) between optical axis and horizontal plane
+  angleh  = 90.0      ! Horizontal angle (degrees) between optical axis and vertical plane passing through pivot poin
+  bvofset = 0.0       ! Vertical offset from beamline axis to center of each source (cm; used only for nsourc = 2)
+  bhofset = 0.0       ! Horizontal offset from beamline axis to center of each source (cm; used only for nsourc = 2)
+  bleni   = 0.0       ! Length along source centerline (source optical axis) from source to intersection point with the beamline axis
+  bheigh  = 60.0      ! Height of source (cm) **
+  bwidth  = 60.0      ! Width of source (cm) **
+  nbshape = 'rect'    ! Beam sourcce shape, 'rect' = rectangular
+  nashape = 's-rect'  ! Aperture shpae, 's-' source axis centered
+  bhfoc = 1.0e6       ! Horizontal focal length of source (cm)
+  bvfoc = 1.0e6       ! Vertical focal length of source (cm)
+  bhdiv = 0.51        ! Horizontal divergence of source (degrees)
+  bvdiv = 0.51        ! Vertical divergence of source (degrees)
+  sfrac1 = 1.0        ! Fraction of lef source current, used only for nsourc =2
+  blenp = 0.0         ! Distance along beamline axis from source exit plane to the fiducial pivot point
+  rpivot = 400.0      ! Radial position of pivot (cm) **
+  zpivot = 0.0        ! Axial position of pivot (cm) **
+
+  naptr = 1           ! Total number of apertures
+  aheigh = 60.0       ! Height of aperture (cm) **
+  awidth = 60.0       ! Width  of aperture (cm) **
+  alen = 2345.3       ! Length from source to aperture for 's-type' apertures
+
+  nbeamtcx = 1
+  ibslow = 1
+  fast_ion_target = 1
+  rtstcx = 1.0
+  beamon = -1000.0
+  btime = 1000000.0
+  timbplt = 0.0
+  iterate_beam = .true.
+  nameb = 'd'
+  fdbeam = 1.0
+  npart = 500000
+  npskip = 1
+  mf = 51
+  iexcit = 5
+  izstrp = 1
+  relnub = 0.1
+ !hdepsmth = 1.0
+
+/
+
+&namelis3
+  pol_flux_lim = 0.99
+/
+
+!
+! Addional notes
+!
+! anglev:
+!   a positive value indicates particles move upward
+! angleh:
+!   zero value denotes perpendicular injection, while a positive value indicates particles move in the co-current direction

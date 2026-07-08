@@ -1,0 +1,30 @@
+{
+  "variable": {
+      "pfuse" : ["fastran" , "pfuse"     , "output"],
+      "pfusi" : ["fastran" , "pfusi"     , "output"],
+      "pnbe"  : ["fastran" , "pnbe"      , "output"],
+      "pnbi"  : ["fastran" , "pnbi"      , "output"],
+      "prfe"  : ["fastran" , "prfe"      , "output"],
+      "prfi"  : ["fastran" , "prfi"      , "output"],
+      "ip"    : ["fastran" , "ip"        , "output"],
+      "ibs"   : ["fastran" , "ibs"       , "output"],
+      "inb"   : ["fastran" , "inb"       , "output"],
+      "irf"   : ["fastran" , "irf"       , "output"]
+  },
+  "const": {
+      "eta_cd" : 0.33,
+      "eta_th" : 0.33
+  },
+  "model": {
+      "pfus" : ["expr", "5.0 * ( pfuse + pfusi )"],
+	  "pinj" : ["expr", "pnbe + pnbi + prfe + prfi"],
+      "pnet" : ["base", {}],
+	  "fbs"  : ["expr", "ibs / ip"],
+	  "fnb"  : ["expr", "inb / ip"],
+	  "frf"  : ["expr", "irf / ip"],
+	  "fni"  : ["expr", "fbs + fnb + frf"]
+  },
+  "io": [
+      "pfus", "pnet", "fbs", "fni"
+  ]
+}

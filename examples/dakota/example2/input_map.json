@@ -1,0 +1,79 @@
+{
+  "scan": [
+    "r",
+    "aratio",
+    "kappa",
+    "delta",
+    "bt",
+    "q95",
+    "fgw_ped",
+    "nepeak",
+    "h98",
+    "pnb",
+    "enb",
+    "prf",
+    "r_rf",
+    "rho_jpeak",
+    "jaxis"
+  ],
+
+  "const": {
+    "f_nesep" : 0.5,
+    "f_te_axis" : 5.75,
+    "f_ti_axis" : 5.0,
+    "xwid"    : 0.08,
+    "xmid"    : 0.96
+  },
+
+  "model": {
+    "a"           : ["expr", "r / aratio"                 ],
+    "ip"          : ["base", {}                           ],
+    "ngw"         : ["base", {}                           ],
+    "ne_ped"      : ["expr", "fgw_ped * ngw"              ], 
+    "ne_axis"     : ["expr", "nepeak * ne_ped"            ],
+    "ne_sep"      : ["expr", "f_nesep * ne_ped"           ],
+    "betan_ped"   : ["base", {}                           ],
+    "te_ped"      : ["base", {"dependency":"betan_ped"}   ],
+    "ti_ped"      : ["expr", "te_ped"                     ],
+    "te_axis"     : ["expr", "f_te_axis * te_ped"         ],
+    "ti_axis"     : ["expr", "f_ti_axis * ti_ped"         ],
+    "pnb_nfreya"  : ["expr", "pnb * 1.e6"                 ],
+    "r_nb"        : ["expr", "r * 1.e2"                   ]
+  },
+
+ "io": {
+    "r"           : ["fastran_init", "R0"         ],
+    "a"           : ["fastran_init", "A0"         ],
+    "kappa"       : ["fastran_init", "KAPPA"      ],
+    "delta"       : ["fastran_init", "DELTA"      ],
+
+    "bt"          : ["fastran_init", "B0"         ],
+    "ip"          : ["fastran_init", "IP"         ],
+
+    "xwid"        : ["fastran_init", "XWID"       ],
+    "xmid"        : ["fastran_init", "XMID"       ],
+
+    "ne_axis"     : ["fastran_init", "NE_AXIS"    ],
+    "ne_ped"      : ["fastran_init", "NE_PED"     ],
+    "ne_sep"      : ["fastran_init", "NE_SEP"     ],
+
+    "te_axis"     : ["fastran_init", "TE_AXIS"    ],
+    "te_ped"      : ["fastran_init", "TE_PED"     ],
+
+    "ti_axis"     : ["fastran_init", "TI_AXIS"    ],
+    "ti_ped"      : ["fastran_init", "TI_PED"     ],
+
+    "h98"         : ["fastran_init", "H98_TARGET" ],
+
+    "rho_jpeak"   : ["fastran_init", "RHO_JPEAK"],     
+    "jaxis"       : ["fastran_init", "JAXIS"],
+
+    "pnb_nfreya"  : ["nfreya"      , "BPTOR_0" ],
+    "enb"         : ["nfreya"      , "EBKEV_0" ],
+    "r_nb"        : ["nfreya"      , "RPIVOT_0"],
+
+    "prf"         : ["hcd_model"   , "INHCD_PE_0" ],
+    "r_rf"        : ["hcd_model"   , "INHCD_XMID_0" ]
+  }
+
+}
