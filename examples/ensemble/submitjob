@@ -1,0 +1,21 @@
+#!/bin/bash -l
+#SBATCH -q debug
+#SBATCH -N 1
+#SBATCH -t 00:30:00
+#SBATCH -J ips_fastran
+#SBATCH -e ips.err
+#SBATCH -o ips.out
+#SBATCH -C cpu
+
+module load python
+conda activate /global/common/software/atom/perlmutter/cesol/conda/v0.17.0
+module load openmpi
+
+export PYTHONPATH=$PWD:$PYTHONPATH
+
+export SHOT_NUMBER=000001
+export TIME_ID=00001
+
+ips.py --simulation=fastran_scan.config --platform=$MACHINE_CONFIG_SERIAL --log=ips.log 
+
+conda deactivate
