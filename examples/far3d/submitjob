@@ -1,0 +1,23 @@
+#!/bin/bash -l
+#SBATCH -q debug
+#SBATCH -N 1
+#SBATCH -t 00:30:00
+#SBATCH -J ips_fastran
+#SBATCH -e ips.err
+#SBATCH -o ips.out
+#SBATCH -C cpu
+
+module load python
+source activate /global/common/software/atom/perlmutter/cesol/conda/dev
+
+export PYTHONPATH=/global/common/software/atom/perlmutter/cesol/local/dev:$PYTHONPATH
+
+export FASTRAN_BIN_DIR=/global/common/software/atom/perlmutter/binaries/fastran/latest
+export FASTRAN_BIN_NAME=xfastran_ver1.1a_mpich_prerelease
+
+export SHOT_NUMBER=000001
+export TIME_ID=00001
+
+ips.py --simulation=fastran_scenario.config --platform=$MACHINE_CONFIG --log=ips.log 
+
+conda deactivate
